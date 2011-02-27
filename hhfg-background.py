@@ -26,7 +26,7 @@ register(
     "Shlomi Fish",
     "2011",
     N_("HHFG Background..."),
-    "RGB*, GRAY*",
+    "",
     [
         (PF_INT, "image_width", "Input Image Width", 1024),
         (PF_INT, "image_height", "Input Image Height", 768),
