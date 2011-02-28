@@ -20,6 +20,9 @@ def hhfg_background(image_width, image_height, radius, margin_width, margin_heig
     BLUR_RLE = 1
     blur_radius = 100
     pdb.plug_in_gauss(image, layer, blur_radius, blur_radius, BLUR_RLE)
+    pdb.gimp_context_set_gradient("Twin Triangles reversed")
+    pdb.plug_in_gradmap(image, layer)
+
     gimp.Display(image)
     gimp.context_pop()
 
