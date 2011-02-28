@@ -12,10 +12,14 @@ def hhfg_background(image_width, image_height, radius, margin_width, margin_heig
     image = gimp.Image(image_width, image_height, RGB)
     layer = gimp.Layer(image, "HHFG1", image_width, image_height, RGBA_IMAGE, 100.0, NORMAL_MODE)
     pdb.gimp_image_add_layer(image, layer, -1)
+    pdb.gimp_selection_all(image)
     pdb.gimp_edit_bucket_fill(layer, BG_BUCKET_FILL, NORMAL_MODE, 100.0, 0.0, False, 0, 0);
     pdb.gimp_round_rect_select(image, margin_width, margin_height, image_width-margin_width*2, image_height-margin_height*2, radius, radius, CHANNEL_OP_REPLACE, False, False, 0.0, 0.0)
-
     pdb.gimp_edit_bucket_fill(layer, FG_BUCKET_FILL, NORMAL_MODE, 100, 0, False, 0, 0);
+    pdb.gimp_selection_none(image)
+    BLUR_RLE = 1
+    blur_radius = 100
+    pdb.plug_in_gauss(image, layer, blur_radius, blur_radius, BLUR_RLE)
     gimp.Display(image)
     gimp.context_pop()
 
