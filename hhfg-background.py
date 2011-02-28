@@ -23,6 +23,23 @@ def hhfg_background(image_width, image_height, radius, margin_width, margin_heig
     pdb.gimp_context_set_gradient("Twin Triangles reversed")
     pdb.plug_in_gradmap(image, layer)
 
+    def copy_image():
+        temp_image = gimp.Image(image_width, image_height, RGB)
+        layer_copy = pdb.gimp_layer_new_from_drawable(layer, temp_image)
+        pdb.gimp_image_add_layer(temp_image, layer_copy, -1)
+        return temp_image
+
+    def save_crop(x,y,w,h,ext):
+        top_image = copy_image()
+        pdb.gimp_image_crop(top_image, w, h, x, y);
+        fn = ("%s-%s.png" % (filename_base,ext))
+        pdb.file_png_save(top_image, top_image.active_drawable, fn, fn, False, 9, False, False, False, False, False)
+
+    save_crop (0, 0, image_width, margin_height+radius, "top")
+    save_crop (0, (image_height-margin_height+radius), 
+            image_width, margin_height+radius, "bottom")
+    save_crop (0, image_height/2, image_width, 1, "middle")
+
     gimp.Display(image)
     gimp.context_pop()
 
