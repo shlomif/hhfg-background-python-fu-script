@@ -38,7 +38,7 @@ def hhfg_background(image_width, image_height, radius, margin_width, margin_heig
     def my_save_crop(name, y, h):
         return save_crop(0, y, image_width, h, name)
 
-    tot_h = margin_height + radius
+    tot_h = margin_height + radius*2
     my_save_crop ("top", 0, tot_h)
     my_save_crop ("bottom", (image_height-tot_h), tot_h)
     my_save_crop ("middle", image_height/2, 1)
