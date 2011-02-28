@@ -31,12 +31,12 @@ def hhfg_background(image_width, image_height, radius, margin_width, margin_heig
 
     def save_crop(x,y,w,h,ext):
         cropped_image = copy_image()
-        pdb.gimp_image_crop(cropped_image, w, h, x, y)
+        cropped_image.crop(w, h, x, y)
         fn = ("%s-%s.png" % (filename_base,ext))
         pdb.file_png_save(cropped_image, cropped_image.active_drawable, fn, fn, False, 9, False, False, False, False, False)
 
     save_crop (0, 0, image_width, margin_height+radius, "top")
-    save_crop (0, (image_height-margin_height+radius), 
+    save_crop (0, (image_height-(margin_height+radius)),
             image_width, margin_height+radius, "bottom")
     save_crop (0, image_height/2, image_width, 1, "middle")
 
